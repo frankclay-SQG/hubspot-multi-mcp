@@ -40,12 +40,12 @@ export const PORTALS: PortalConfig[] = [
     blockedDomains: ["hologic.com"],
   },
   {
-    key: "clay",
-    label: "Clay Agency",
-    tokenEnv: "HS_TOKEN_CLAY",
-    portalIdEnv: "HS_PORTAL_ID_CLAY",
+    key: "ndconsulting",
+    label: "New Dawn Consulting",
+    tokenEnv: "HS_TOKEN_NDCONSULTING",
+    portalIdEnv: "HS_PORTAL_ID_NDCONSULTING",
     writesAllowed: true,
-    blockedDomains: ["hologic.com"],
+    blockedDomains: [],
   },
   {
     key: "sqg",
@@ -54,6 +54,31 @@ export const PORTALS: PortalConfig[] = [
     portalIdEnv: "HS_PORTAL_ID_SQG",
     writesAllowed: true,
     blockedDomains: [],
+  },
+  {
+    key: "korma",
+    label: "KORMA-USA",
+    tokenEnv: "HS_TOKEN_KORMA",
+    portalIdEnv: "HS_PORTAL_ID_KORMA",
+    writesAllowed: true,
+    blockedDomains: [],
+  },
+  {
+    key: "viola",
+    label: "Viola Holdings",
+    tokenEnv: "HS_TOKEN_VIOLA",
+    portalIdEnv: "HS_PORTAL_ID_VIOLA",
+    writesAllowed: true,
+    blockedDomains: [],
+  },
+  {
+    // Optional: Clay Agency's separate HubSpot portal. Shows "unavailable" until a token is set.
+    key: "clay",
+    label: "Clay Agency",
+    tokenEnv: "HS_TOKEN_CLAY",
+    portalIdEnv: "HS_PORTAL_ID_CLAY",
+    writesAllowed: true,
+    blockedDomains: ["hologic.com"],
   },
 ];
 

@@ -109,9 +109,17 @@ describe("domain helpers", () => {
 });
 
 describe("portal verification", () => {
+  it("marks unconfigured portals unavailable without breaking the others", async () => {
+    const r = await svc.listPortals();
+    for (const k of ["ndconsulting", "korma", "viola"]) expect(r.find((p) => p.portal === k)!.status).toBe("unavailable");
+    expect(r.find((p) => p.portal === "sqg")!.status).toBe("ok");
+  });
+
   it("lists all portals as ok when tokens match", async () => {
     const r = await svc.listPortals();
-    expect(r.map((p) => [p.portal, p.status])).toEqual([["newdawn", "ok"], ["clay", "ok"], ["sqg", "ok"]]);
+    const ok = Object.fromEntries(r.map((p) => [p.portal, p.status]));
+    expect(ok).toMatchObject({ newdawn: "ok", clay: "ok", sqg: "ok" });
+    expect(r.map((p) => p.portal)).toEqual(["newdawn", "ndconsulting", "sqg", "korma", "viola", "clay"]);
   });
 
   it("disables a portal whose token belongs to a different Hub ID (swapped tokens)", async () => {
@@ -136,7 +144,7 @@ describe("portal verification", () => {
   });
 
   it("rejects unknown portals", async () => {
-    await expect(svc.search("korma", "contacts", {})).rejects.toThrow(/Unknown portal/);
+    await expect(svc.search("notaportal", "contacts", {})).rejects.toThrow(/Unknown portal/);
   });
 });
 
@@ -223,7 +231,7 @@ describe("find_across_portals", () => {
     await svc.createRecord("clay", "clay", "contacts", { email: "medicare@client.com" });
     const r = await svc.findAcrossPortals({ email: "medicare@client.com" });
     const hits = Object.fromEntries(r.results.map((p: any) => [p.portal, p.matches?.length ?? 0]));
-    expect(hits).toEqual({ newdawn: 0, clay: 1, sqg: 0 });
+    expect(hits).toMatchObject({ newdawn: 0, clay: 1, sqg: 0 });
   });
 });
 

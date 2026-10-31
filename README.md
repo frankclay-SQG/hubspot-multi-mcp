@@ -5,8 +5,13 @@ A private MCP server that gives Claude access to several HubSpot portals through
 | Portal key | Portal |
 |---|---|
 | `newdawn` | New Dawn Insurance Agency (Hub ID 246454273) |
-| `clay` | Clay Agency |
+| `ndconsulting` | New Dawn Consulting |
 | `sqg` | Software Quality Guru |
+| `korma` | KORMA-USA |
+| `viola` | Viola Holdings |
+| `clay` | Clay Agency (optional) |
+
+Cancer Coach USA is not included (it uses Viotto, not HubSpot). A portal with no token configured shows as "unavailable" and is otherwise ignored.
 
 Add or change portals in `lib/portals.ts`.
 
