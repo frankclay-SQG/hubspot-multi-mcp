@@ -1,0 +1,3363 @@
+{
+  "groups": {
+    "contacts": [
+      {
+        "name": "korma_member_profile",
+        "label": "KORMA · Member Profile",
+        "displayOrder": 1
+      },
+      {
+        "name": "korma_family",
+        "label": "KORMA · Family & Emergency",
+        "displayOrder": 2
+      },
+      {
+        "name": "korma_rank_summary",
+        "label": "KORMA · Rank Summary",
+        "displayOrder": 3
+      },
+      {
+        "name": "korma_rank_tkd",
+        "label": "KORMA · Rank — Taekwondo",
+        "displayOrder": 4
+      },
+      {
+        "name": "korma_rank_hkd",
+        "label": "KORMA · Rank — Hapkido",
+        "displayOrder": 5
+      },
+      {
+        "name": "korma_rank_kumdo",
+        "label": "KORMA · Rank — Kumdo",
+        "displayOrder": 6
+      },
+      {
+        "name": "korma_attendance",
+        "label": "KORMA · Attendance",
+        "displayOrder": 7
+      },
+      {
+        "name": "korma_billing",
+        "label": "KORMA · Membership & Billing",
+        "displayOrder": 8
+      },
+      {
+        "name": "korma_waivers",
+        "label": "KORMA · Waivers & Agreements",
+        "displayOrder": 9
+      },
+      {
+        "name": "korma_lead",
+        "label": "KORMA · Lead & Marketing",
+        "displayOrder": 10
+      },
+      {
+        "name": "korma_federation",
+        "label": "KORMA · Federation",
+        "displayOrder": 11
+      }
+    ],
+    "companies": [
+      {
+        "name": "korma_school",
+        "label": "KORMA · School / Dojang",
+        "displayOrder": 1
+      }
+    ],
+    "deals": [
+      {
+        "name": "korma_deal",
+        "label": "KORMA · Deal Details",
+        "displayOrder": 1
+      }
+    ]
+  },
+  "properties": {
+    "contacts": [
+      {
+        "name": "korma_member_id",
+        "label": "Member ID",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Assigned by the app; printed on cards and certificates.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_member_type",
+        "label": "Member Type",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Student",
+            "value": "student",
+            "displayOrder": 0
+          },
+          {
+            "label": "Parent/Guardian",
+            "value": "parent_guardian",
+            "displayOrder": 1
+          },
+          {
+            "label": "Instructor",
+            "value": "instructor",
+            "displayOrder": 2
+          },
+          {
+            "label": "Master",
+            "value": "master",
+            "displayOrder": 3
+          },
+          {
+            "label": "School Owner",
+            "value": "school_owner",
+            "displayOrder": 4
+          },
+          {
+            "label": "Federation Applicant",
+            "value": "federation_applicant",
+            "displayOrder": 5
+          },
+          {
+            "label": "Seminar Client",
+            "value": "seminar_client",
+            "displayOrder": 6
+          }
+        ],
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_member_status",
+        "label": "Member Status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Prospect",
+            "value": "prospect",
+            "displayOrder": 0
+          },
+          {
+            "label": "Trial",
+            "value": "trial",
+            "displayOrder": 1
+          },
+          {
+            "label": "Active",
+            "value": "active",
+            "displayOrder": 2
+          },
+          {
+            "label": "Frozen",
+            "value": "frozen",
+            "displayOrder": 3
+          },
+          {
+            "label": "Inactive",
+            "value": "inactive",
+            "displayOrder": 4
+          },
+          {
+            "label": "Alumni",
+            "value": "alumni",
+            "displayOrder": 5
+          }
+        ],
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_status_reason",
+        "label": "Status Reason",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Schedule",
+            "value": "schedule",
+            "displayOrder": 0
+          },
+          {
+            "label": "Cost",
+            "value": "cost",
+            "displayOrder": 1
+          },
+          {
+            "label": "Moved",
+            "value": "moved",
+            "displayOrder": 2
+          },
+          {
+            "label": "Lost interest",
+            "value": "lost_interest",
+            "displayOrder": 3
+          },
+          {
+            "label": "Graduated",
+            "value": "graduated",
+            "displayOrder": 4
+          },
+          {
+            "label": "Other",
+            "value": "other",
+            "displayOrder": 5
+          }
+        ],
+        "description": "No medical reasons in CRM.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_join_date",
+        "label": "Join Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "First paid enrollment.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_freeze_until",
+        "label": "Frozen Until",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_cancel_date",
+        "label": "Cancel Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_programs",
+        "label": "Programs",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Taekwondo",
+            "value": "taekwondo",
+            "displayOrder": 0
+          },
+          {
+            "label": "Hapkido",
+            "value": "hapkido",
+            "displayOrder": 1
+          },
+          {
+            "label": "Kumdo",
+            "value": "kumdo",
+            "displayOrder": 2
+          },
+          {
+            "label": "Homeschool PE",
+            "value": "homeschool_pe",
+            "displayOrder": 3
+          },
+          {
+            "label": "Seminar",
+            "value": "seminar",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_age_group",
+        "label": "Age Group",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Little Dragons (4-6)",
+            "value": "little_dragons_4_6",
+            "displayOrder": 0
+          },
+          {
+            "label": "Youth (7-12)",
+            "value": "youth_7_12",
+            "displayOrder": 1
+          },
+          {
+            "label": "Teen (13-17)",
+            "value": "teen_13_17",
+            "displayOrder": 2
+          },
+          {
+            "label": "Adult (18+)",
+            "value": "adult_18plus",
+            "displayOrder": 3
+          }
+        ],
+        "description": "Set by app from date of birth.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "date_of_birth",
+        "label": "Date of Birth",
+        "type": "date",
+        "fieldType": "date",
+        "description": "The only DOB field (replaces korma_date_of_birth). May already exist in the portal.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_sex",
+        "label": "Sex",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "M",
+            "value": "M",
+            "displayOrder": 0
+          },
+          {
+            "label": "F",
+            "value": "F",
+            "displayOrder": 1
+          }
+        ],
+        "description": "Required by federation forms; replaces changmookwan_/wkmaf_/whmaf_sex.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_preferred_language",
+        "label": "Preferred Language",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "English",
+            "value": "english",
+            "displayOrder": 0
+          },
+          {
+            "label": "Korean",
+            "value": "korean",
+            "displayOrder": 1
+          }
+        ],
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_groups",
+        "label": "Groups",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Demo Team",
+            "value": "demo_team",
+            "displayOrder": 0
+          },
+          {
+            "label": "Competition Team",
+            "value": "competition_team",
+            "displayOrder": 1
+          },
+          {
+            "label": "Leadership",
+            "value": "leadership",
+            "displayOrder": 2
+          },
+          {
+            "label": "Assistant Instructor",
+            "value": "assistant_instructor",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_home_school_name",
+        "label": "Home School (text)",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Fallback only when the school is not a Company yet.",
+        "groupName": "korma_member_profile"
+      },
+      {
+        "name": "korma_is_minor",
+        "label": "Minor",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "Set by app from date of birth.",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_household_id",
+        "label": "Household ID",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Same value on every family member.",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_guardian_name",
+        "label": "Guardian Name",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_guardian_email",
+        "label": "Guardian Email",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Emails for minors go here.",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_guardian_phone",
+        "label": "Guardian Phone",
+        "type": "string",
+        "fieldType": "phonenumber",
+        "description": "",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_guardian_relationship",
+        "label": "Guardian Relationship",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Parent",
+            "value": "parent",
+            "displayOrder": 0
+          },
+          {
+            "label": "Legal guardian",
+            "value": "legal_guardian",
+            "displayOrder": 1
+          },
+          {
+            "label": "Grandparent",
+            "value": "grandparent",
+            "displayOrder": 2
+          },
+          {
+            "label": "Other",
+            "value": "other",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_emergency_name",
+        "label": "Emergency Contact",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_emergency_phone",
+        "label": "Emergency Phone",
+        "type": "string",
+        "fieldType": "phonenumber",
+        "description": "",
+        "groupName": "korma_family"
+      },
+      {
+        "name": "korma_highest_dan",
+        "label": "Highest Dan (any discipline)",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_rank_summary"
+      },
+      {
+        "name": "korma_instructor_of_record",
+        "label": "Instructor of Record",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Lineage: instructor who promoted them.",
+        "groupName": "korma_rank_summary"
+      },
+      {
+        "name": "korma_tkd_rank",
+        "label": "TKD Current Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Poom",
+            "value": "p1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Poom",
+            "value": "p2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Poom",
+            "value": "p3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Poom",
+            "value": "p4",
+            "displayOrder": 13
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 14
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 15
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 16
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 17
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 18
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 19
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 20
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 21
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 22
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_rank_order",
+        "label": "TKD Rank Order",
+        "type": "number",
+        "fieldType": "number",
+        "description": "1 = lowest Gup; increases with rank. Set with the rank (app).",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_rank_date",
+        "label": "TKD Rank Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "Date of last promotion.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_stripes",
+        "label": "TKD Stripes",
+        "type": "number",
+        "fieldType": "number",
+        "description": "0–4 skill stripes at current rank.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_next_rank",
+        "label": "TKD Next Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Poom",
+            "value": "p1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Poom",
+            "value": "p2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Poom",
+            "value": "p3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Poom",
+            "value": "p4",
+            "displayOrder": 13
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 14
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 15
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 16
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 17
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 18
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 19
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 20
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 21
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 22
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_classes_at_rank",
+        "label": "TKD Classes at Rank",
+        "type": "number",
+        "fieldType": "number",
+        "description": "Synced nightly from app attendance.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_eligible_date",
+        "label": "TKD Eligible Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "App: rank date + minimum days at rank.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_test_eligible",
+        "label": "TKD Eligible to Test",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "App: days, classes and skills requirements met.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_cert_number",
+        "label": "TKD Certificate No.",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Federation certificate for current Dan/Poom.",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_tkd_instructor_level",
+        "label": "TKD Instructor Level",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none",
+            "displayOrder": 0
+          },
+          {
+            "label": "Assistant",
+            "value": "assistant",
+            "displayOrder": 1
+          },
+          {
+            "label": "Instructor",
+            "value": "instructor",
+            "displayOrder": 2
+          },
+          {
+            "label": "Master Instructor",
+            "value": "master_instructor",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_tkd"
+      },
+      {
+        "name": "korma_hkd_rank",
+        "label": "HKD Current Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 13
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 14
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 15
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 16
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 17
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 18
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_rank_order",
+        "label": "HKD Rank Order",
+        "type": "number",
+        "fieldType": "number",
+        "description": "1 = lowest Gup; increases with rank. Set with the rank (app).",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_rank_date",
+        "label": "HKD Rank Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "Date of last promotion.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_stripes",
+        "label": "HKD Stripes",
+        "type": "number",
+        "fieldType": "number",
+        "description": "0–4 skill stripes at current rank.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_next_rank",
+        "label": "HKD Next Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 13
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 14
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 15
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 16
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 17
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 18
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_classes_at_rank",
+        "label": "HKD Classes at Rank",
+        "type": "number",
+        "fieldType": "number",
+        "description": "Synced nightly from app attendance.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_eligible_date",
+        "label": "HKD Eligible Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "App: rank date + minimum days at rank.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_test_eligible",
+        "label": "HKD Eligible to Test",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "App: days, classes and skills requirements met.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_cert_number",
+        "label": "HKD Certificate No.",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Federation certificate for current Dan/Poom.",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_hkd_instructor_level",
+        "label": "HKD Instructor Level",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none",
+            "displayOrder": 0
+          },
+          {
+            "label": "Assistant",
+            "value": "assistant",
+            "displayOrder": 1
+          },
+          {
+            "label": "Instructor",
+            "value": "instructor",
+            "displayOrder": 2
+          },
+          {
+            "label": "Master Instructor",
+            "value": "master_instructor",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_hkd"
+      },
+      {
+        "name": "korma_kumdo_rank",
+        "label": "Kumdo Current Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 0
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 1
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 2
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 3
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 4
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 5
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 6
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 7
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 9
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 10
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 11
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 12
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 13
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 14
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 15
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 16
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_rank_order",
+        "label": "Kumdo Rank Order",
+        "type": "number",
+        "fieldType": "number",
+        "description": "1 = lowest Gup; increases with rank. Set with the rank (app).",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_rank_date",
+        "label": "Kumdo Rank Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "Date of last promotion.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_stripes",
+        "label": "Kumdo Stripes",
+        "type": "number",
+        "fieldType": "number",
+        "description": "0–4 skill stripes at current rank.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_next_rank",
+        "label": "Kumdo Next Rank",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 0
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 1
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 2
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 3
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 4
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 5
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 6
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 7
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 9
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 10
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 11
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 12
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 13
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 14
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 15
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 16
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_classes_at_rank",
+        "label": "Kumdo Classes at Rank",
+        "type": "number",
+        "fieldType": "number",
+        "description": "Synced nightly from app attendance.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_eligible_date",
+        "label": "Kumdo Eligible Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "App: rank date + minimum days at rank.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_test_eligible",
+        "label": "Kumdo Eligible to Test",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "App: days, classes and skills requirements met.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_cert_number",
+        "label": "Kumdo Certificate No.",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Federation certificate for current Dan/Poom.",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_kumdo_instructor_level",
+        "label": "Kumdo Instructor Level",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none",
+            "displayOrder": 0
+          },
+          {
+            "label": "Assistant",
+            "value": "assistant",
+            "displayOrder": 1
+          },
+          {
+            "label": "Instructor",
+            "value": "instructor",
+            "displayOrder": 2
+          },
+          {
+            "label": "Master Instructor",
+            "value": "master_instructor",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_rank_kumdo"
+      },
+      {
+        "name": "korma_last_attended",
+        "label": "Last Attended",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_total_classes",
+        "label": "Total Classes",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_classes_30d",
+        "label": "Classes (30 days)",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_classes_90d",
+        "label": "Classes (90 days)",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_at_risk",
+        "label": "At Risk",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "Active with no check-in for the app's threshold (default 14 days).",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_attendance_milestone",
+        "label": "Attendance Milestone",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "25 classes",
+            "value": "25",
+            "displayOrder": 0
+          },
+          {
+            "label": "50 classes",
+            "value": "50",
+            "displayOrder": 1
+          },
+          {
+            "label": "100 classes",
+            "value": "100",
+            "displayOrder": 2
+          },
+          {
+            "label": "250 classes",
+            "value": "250",
+            "displayOrder": 3
+          },
+          {
+            "label": "500 classes",
+            "value": "500",
+            "displayOrder": 4
+          },
+          {
+            "label": "1000 classes",
+            "value": "1000",
+            "displayOrder": 5
+          }
+        ],
+        "description": "",
+        "groupName": "korma_attendance"
+      },
+      {
+        "name": "korma_membership_plan",
+        "label": "Membership Plan",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Monthly",
+            "value": "monthly",
+            "displayOrder": 0
+          },
+          {
+            "label": "6-Month",
+            "value": "6_month",
+            "displayOrder": 1
+          },
+          {
+            "label": "Annual",
+            "value": "annual",
+            "displayOrder": 2
+          },
+          {
+            "label": "Family",
+            "value": "family",
+            "displayOrder": 3
+          },
+          {
+            "label": "Homeschool Term",
+            "value": "homeschool_term",
+            "displayOrder": 4
+          },
+          {
+            "label": "Drop-in",
+            "value": "drop_in",
+            "displayOrder": 5
+          },
+          {
+            "label": "Comp",
+            "value": "comp",
+            "displayOrder": 6
+          }
+        ],
+        "description": "",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_membership_start",
+        "label": "Membership Start",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_membership_end",
+        "label": "Membership End / Renewal",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_tuition_monthly",
+        "label": "Monthly Tuition (USD)",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_billing_status",
+        "label": "Billing Status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Current",
+            "value": "current",
+            "displayOrder": 0
+          },
+          {
+            "label": "Past Due",
+            "value": "past_due",
+            "displayOrder": 1
+          },
+          {
+            "label": "Paused",
+            "value": "paused",
+            "displayOrder": 2
+          },
+          {
+            "label": "Cancelled",
+            "value": "cancelled",
+            "displayOrder": 3
+          },
+          {
+            "label": "Comp",
+            "value": "comp",
+            "displayOrder": 4
+          }
+        ],
+        "description": "Set by Stripe webhook.",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_next_bill_date",
+        "label": "Next Bill Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_stripe_customer_id",
+        "label": "Stripe Customer ID",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Link-out only; no card data in HubSpot.",
+        "groupName": "korma_billing"
+      },
+      {
+        "name": "korma_waiver_signed_date",
+        "label": "Waiver Signed",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_waiver_version",
+        "label": "Waiver Version",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_waiver_signed_by",
+        "label": "Waiver Signed By",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Guardian name for minors.",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_agreement_signed_date",
+        "label": "Membership Agreement Signed",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_agreement_version",
+        "label": "Agreement Version",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_photo_release",
+        "label": "Photo/Media Release",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "",
+        "groupName": "korma_waivers"
+      },
+      {
+        "name": "korma_inquiry_type",
+        "label": "Inquiry Type",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Regular class",
+            "value": "regular_class",
+            "displayOrder": 0
+          },
+          {
+            "label": "Seminar",
+            "value": "seminar",
+            "displayOrder": 1
+          },
+          {
+            "label": "Certification",
+            "value": "certification",
+            "displayOrder": 2
+          },
+          {
+            "label": "Enrollment",
+            "value": "enrollment",
+            "displayOrder": 3
+          },
+          {
+            "label": "Homeschool",
+            "value": "homeschool",
+            "displayOrder": 4
+          },
+          {
+            "label": "General",
+            "value": "general",
+            "displayOrder": 5
+          }
+        ],
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_interest_program",
+        "label": "Program of Interest",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Taekwondo",
+            "value": "taekwondo",
+            "displayOrder": 0
+          },
+          {
+            "label": "Hapkido",
+            "value": "hapkido",
+            "displayOrder": 1
+          },
+          {
+            "label": "Kumdo",
+            "value": "kumdo",
+            "displayOrder": 2
+          },
+          {
+            "label": "Homeschool PE",
+            "value": "homeschool_pe",
+            "displayOrder": 3
+          },
+          {
+            "label": "Seminar",
+            "value": "seminar",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_lead_source",
+        "label": "Lead Source",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Website",
+            "value": "website",
+            "displayOrder": 0
+          },
+          {
+            "label": "Walk-in",
+            "value": "walk_in",
+            "displayOrder": 1
+          },
+          {
+            "label": "Referral",
+            "value": "referral",
+            "displayOrder": 2
+          },
+          {
+            "label": "Event/Demo",
+            "value": "event_demo",
+            "displayOrder": 3
+          },
+          {
+            "label": "Social",
+            "value": "social",
+            "displayOrder": 4
+          },
+          {
+            "label": "Google",
+            "value": "google",
+            "displayOrder": 5
+          },
+          {
+            "label": "QR Code",
+            "value": "qr_code",
+            "displayOrder": 6
+          },
+          {
+            "label": "Federation",
+            "value": "federation",
+            "displayOrder": 7
+          }
+        ],
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_referred_by",
+        "label": "Referred By",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_trial_date",
+        "label": "Trial Class Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_trial_attended",
+        "label": "Trial Attended",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "displayOrder": 0
+          },
+          {
+            "label": "No",
+            "value": "false",
+            "displayOrder": 1
+          }
+        ],
+        "description": "",
+        "groupName": "korma_lead"
+      },
+      {
+        "name": "korma_federations",
+        "label": "Federations",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "WT Changmookwan",
+            "value": "wt_changmookwan",
+            "displayOrder": 0
+          },
+          {
+            "label": "WKMAF",
+            "value": "wkmaf",
+            "displayOrder": 1
+          },
+          {
+            "label": "WHMAF",
+            "value": "whmaf",
+            "displayOrder": 2
+          },
+          {
+            "label": "Kukkiwon",
+            "value": "kukkiwon",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_federation"
+      },
+      {
+        "name": "korma_disciplines",
+        "label": "Disciplines Practiced",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Taekwondo",
+            "value": "taekwondo",
+            "displayOrder": 0
+          },
+          {
+            "label": "Hapkido",
+            "value": "hapkido",
+            "displayOrder": 1
+          },
+          {
+            "label": "Kumdo",
+            "value": "kumdo",
+            "displayOrder": 2
+          },
+          {
+            "label": "Other",
+            "value": "other",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_federation"
+      },
+      {
+        "name": "korma_last_application_ref",
+        "label": "Last Application Ref",
+        "type": "string",
+        "fieldType": "text",
+        "description": "Latest only; every application is also a Certifications deal.",
+        "groupName": "korma_federation"
+      }
+    ],
+    "companies": [
+      {
+        "name": "korma_school_type",
+        "label": "School Type",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "KORMA HQ",
+            "value": "korma_hq",
+            "displayOrder": 0
+          },
+          {
+            "label": "Member School",
+            "value": "member_school",
+            "displayOrder": 1
+          },
+          {
+            "label": "Affiliate",
+            "value": "affiliate",
+            "displayOrder": 2
+          },
+          {
+            "label": "Corporate Seminar Client",
+            "value": "corporate_seminar_client",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_charter_status",
+        "label": "Charter Status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Applicant",
+            "value": "applicant",
+            "displayOrder": 0
+          },
+          {
+            "label": "Active",
+            "value": "active",
+            "displayOrder": 1
+          },
+          {
+            "label": "Lapsed",
+            "value": "lapsed",
+            "displayOrder": 2
+          },
+          {
+            "label": "Revoked",
+            "value": "revoked",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_charter_number",
+        "label": "Charter Number",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_charter_start",
+        "label": "Charter Start",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_charter_expires",
+        "label": "Charter Expires",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_federations",
+        "label": "Federations",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "WT Changmookwan",
+            "value": "wt_changmookwan",
+            "displayOrder": 0
+          },
+          {
+            "label": "WKMAF",
+            "value": "wkmaf",
+            "displayOrder": 1
+          },
+          {
+            "label": "WHMAF",
+            "value": "whmaf",
+            "displayOrder": 2
+          },
+          {
+            "label": "Kukkiwon",
+            "value": "kukkiwon",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_programs_offered",
+        "label": "Programs Offered",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Taekwondo",
+            "value": "taekwondo",
+            "displayOrder": 0
+          },
+          {
+            "label": "Hapkido",
+            "value": "hapkido",
+            "displayOrder": 1
+          },
+          {
+            "label": "Kumdo",
+            "value": "kumdo",
+            "displayOrder": 2
+          },
+          {
+            "label": "Homeschool PE",
+            "value": "homeschool_pe",
+            "displayOrder": 3
+          },
+          {
+            "label": "Seminar",
+            "value": "seminar",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_head_instructor",
+        "label": "Head Instructor",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_school"
+      },
+      {
+        "name": "korma_active_students",
+        "label": "Active Students",
+        "type": "number",
+        "fieldType": "number",
+        "description": "Synced from app.",
+        "groupName": "korma_school"
+      }
+    ],
+    "deals": [
+      {
+        "name": "korma_discipline",
+        "label": "Discipline",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Taekwondo",
+            "value": "taekwondo",
+            "displayOrder": 0
+          },
+          {
+            "label": "Hapkido",
+            "value": "hapkido",
+            "displayOrder": 1
+          },
+          {
+            "label": "Kumdo",
+            "value": "kumdo",
+            "displayOrder": 2
+          },
+          {
+            "label": "Homeschool PE",
+            "value": "homeschool_pe",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_federation",
+        "label": "Federation",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "WT Changmookwan",
+            "value": "wt_changmookwan",
+            "displayOrder": 0
+          },
+          {
+            "label": "WKMAF",
+            "value": "wkmaf",
+            "displayOrder": 1
+          },
+          {
+            "label": "WHMAF",
+            "value": "whmaf",
+            "displayOrder": 2
+          },
+          {
+            "label": "Kukkiwon",
+            "value": "kukkiwon",
+            "displayOrder": 3
+          },
+          {
+            "label": "KORMA-USA",
+            "value": "korma_usa",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_rank_from",
+        "label": "Rank From",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Poom",
+            "value": "p1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Poom",
+            "value": "p2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Poom",
+            "value": "p3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Poom",
+            "value": "p4",
+            "displayOrder": 13
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 14
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 15
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 16
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 17
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 18
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 19
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 20
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 21
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 22
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_rank_to",
+        "label": "Rank To",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "10th Gup",
+            "value": "g10",
+            "displayOrder": 0
+          },
+          {
+            "label": "9th Gup",
+            "value": "g9",
+            "displayOrder": 1
+          },
+          {
+            "label": "8th Gup",
+            "value": "g8",
+            "displayOrder": 2
+          },
+          {
+            "label": "7th Gup",
+            "value": "g7",
+            "displayOrder": 3
+          },
+          {
+            "label": "6th Gup",
+            "value": "g6",
+            "displayOrder": 4
+          },
+          {
+            "label": "5th Gup",
+            "value": "g5",
+            "displayOrder": 5
+          },
+          {
+            "label": "4th Gup",
+            "value": "g4",
+            "displayOrder": 6
+          },
+          {
+            "label": "3rd Gup",
+            "value": "g3",
+            "displayOrder": 7
+          },
+          {
+            "label": "2nd Gup",
+            "value": "g2",
+            "displayOrder": 8
+          },
+          {
+            "label": "1st Gup",
+            "value": "g1",
+            "displayOrder": 9
+          },
+          {
+            "label": "1st Poom",
+            "value": "p1",
+            "displayOrder": 10
+          },
+          {
+            "label": "2nd Poom",
+            "value": "p2",
+            "displayOrder": 11
+          },
+          {
+            "label": "3rd Poom",
+            "value": "p3",
+            "displayOrder": 12
+          },
+          {
+            "label": "4th Poom",
+            "value": "p4",
+            "displayOrder": 13
+          },
+          {
+            "label": "1st Dan",
+            "value": "d1",
+            "displayOrder": 14
+          },
+          {
+            "label": "2nd Dan",
+            "value": "d2",
+            "displayOrder": 15
+          },
+          {
+            "label": "3rd Dan",
+            "value": "d3",
+            "displayOrder": 16
+          },
+          {
+            "label": "4th Dan",
+            "value": "d4",
+            "displayOrder": 17
+          },
+          {
+            "label": "5th Dan",
+            "value": "d5",
+            "displayOrder": 18
+          },
+          {
+            "label": "6th Dan",
+            "value": "d6",
+            "displayOrder": 19
+          },
+          {
+            "label": "7th Dan",
+            "value": "d7",
+            "displayOrder": 20
+          },
+          {
+            "label": "8th Dan",
+            "value": "d8",
+            "displayOrder": 21
+          },
+          {
+            "label": "9th Dan",
+            "value": "d9",
+            "displayOrder": 22
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_test_date",
+        "label": "Test Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_examiner",
+        "label": "Examiner / Board",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_test_result",
+        "label": "Test Result",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Pass",
+            "value": "pass",
+            "displayOrder": 0
+          },
+          {
+            "label": "Pass with Conditions",
+            "value": "pass_with_conditions",
+            "displayOrder": 1
+          },
+          {
+            "label": "Retest",
+            "value": "retest",
+            "displayOrder": 2
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_test_score",
+        "label": "Test Score",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_cert_types",
+        "label": "Certificates Requested",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {
+            "label": "Dan",
+            "value": "dan",
+            "displayOrder": 0
+          },
+          {
+            "label": "Instructor",
+            "value": "instructor",
+            "displayOrder": 1
+          },
+          {
+            "label": "School Charter",
+            "value": "school_charter",
+            "displayOrder": 2
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_applied_dan_rank",
+        "label": "Applied Dan Rank",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_instructor_level",
+        "label": "Instructor Level",
+        "type": "number",
+        "fieldType": "number",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_application_ref",
+        "label": "Application Ref",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_evidence_status",
+        "label": "Evidence Status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Missing",
+            "value": "missing",
+            "displayOrder": 0
+          },
+          {
+            "label": "Received",
+            "value": "received",
+            "displayOrder": 1
+          },
+          {
+            "label": "Verified",
+            "value": "verified",
+            "displayOrder": 2
+          },
+          {
+            "label": "Rejected",
+            "value": "rejected",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_review_decision",
+        "label": "Review Decision",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Approved",
+            "value": "approved",
+            "displayOrder": 0
+          },
+          {
+            "label": "Approved with Override",
+            "value": "approved_with_override",
+            "displayOrder": 1
+          },
+          {
+            "label": "Needs Amendment",
+            "value": "needs_amendment",
+            "displayOrder": 2
+          },
+          {
+            "label": "Denied",
+            "value": "denied",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_certificate_number",
+        "label": "Certificate Number",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_certificate_issued",
+        "label": "Certificate Issued",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_payment_status",
+        "label": "Payment Status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Unpaid",
+            "value": "unpaid",
+            "displayOrder": 0
+          },
+          {
+            "label": "Paid",
+            "value": "paid",
+            "displayOrder": 1
+          },
+          {
+            "label": "Refunded",
+            "value": "refunded",
+            "displayOrder": 2
+          },
+          {
+            "label": "Waived",
+            "value": "waived",
+            "displayOrder": 3
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_stripe_session_id",
+        "label": "Stripe Session ID",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_discount_code",
+        "label": "Discount Code",
+        "type": "string",
+        "fieldType": "text",
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_membership_plan",
+        "label": "Membership Plan",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Monthly",
+            "value": "monthly",
+            "displayOrder": 0
+          },
+          {
+            "label": "6-Month",
+            "value": "6_month",
+            "displayOrder": 1
+          },
+          {
+            "label": "Annual",
+            "value": "annual",
+            "displayOrder": 2
+          },
+          {
+            "label": "Family",
+            "value": "family",
+            "displayOrder": 3
+          },
+          {
+            "label": "Homeschool Term",
+            "value": "homeschool_term",
+            "displayOrder": 4
+          },
+          {
+            "label": "Drop-in",
+            "value": "drop_in",
+            "displayOrder": 5
+          },
+          {
+            "label": "Comp",
+            "value": "comp",
+            "displayOrder": 6
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_lost_reason",
+        "label": "Lost Reason",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "No-show",
+            "value": "no_show",
+            "displayOrder": 0
+          },
+          {
+            "label": "Price",
+            "value": "price",
+            "displayOrder": 1
+          },
+          {
+            "label": "Schedule",
+            "value": "schedule",
+            "displayOrder": 2
+          },
+          {
+            "label": "Chose another school",
+            "value": "chose_another_school",
+            "displayOrder": 3
+          },
+          {
+            "label": "Not ready",
+            "value": "not_ready",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_event_type",
+        "label": "Event Type",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "label": "Corporate Seminar",
+            "value": "corporate_seminar",
+            "displayOrder": 0
+          },
+          {
+            "label": "Individual Seminar",
+            "value": "individual_seminar",
+            "displayOrder": 1
+          },
+          {
+            "label": "Camp",
+            "value": "camp",
+            "displayOrder": 2
+          },
+          {
+            "label": "Tournament",
+            "value": "tournament",
+            "displayOrder": 3
+          },
+          {
+            "label": "Demo",
+            "value": "demo",
+            "displayOrder": 4
+          }
+        ],
+        "description": "",
+        "groupName": "korma_deal"
+      },
+      {
+        "name": "korma_event_date",
+        "label": "Event Date",
+        "type": "date",
+        "fieldType": "date",
+        "description": "",
+        "groupName": "korma_deal"
+      }
+    ]
+  },
+  "pipelines": [
+    {
+      "label": "KORMA · Enrollment",
+      "displayOrder": 1,
+      "stages": [
+        {
+          "label": "New Inquiry",
+          "displayOrder": 0,
+          "metadata": {
+            "probability": "0.1"
+          }
+        },
+        {
+          "label": "Contacted",
+          "displayOrder": 1,
+          "metadata": {
+            "probability": "0.2"
+          }
+        },
+        {
+          "label": "Trial Booked",
+          "displayOrder": 2,
+          "metadata": {
+            "probability": "0.4"
+          }
+        },
+        {
+          "label": "Trial Attended",
+          "displayOrder": 3,
+          "metadata": {
+            "probability": "0.6"
+          }
+        },
+        {
+          "label": "Offer Sent",
+          "displayOrder": 4,
+          "metadata": {
+            "probability": "0.8"
+          }
+        },
+        {
+          "label": "Enrolled",
+          "displayOrder": 5,
+          "metadata": {
+            "probability": "1"
+          }
+        },
+        {
+          "label": "Lost",
+          "displayOrder": 6,
+          "metadata": {
+            "probability": "0"
+          }
+        }
+      ]
+    },
+    {
+      "label": "KORMA · Belt Testing & Promotions",
+      "displayOrder": 2,
+      "stages": [
+        {
+          "label": "Eligible",
+          "displayOrder": 0,
+          "metadata": {
+            "probability": "0.2"
+          }
+        },
+        {
+          "label": "Invited",
+          "displayOrder": 1,
+          "metadata": {
+            "probability": "0.4"
+          }
+        },
+        {
+          "label": "Registered & Paid",
+          "displayOrder": 2,
+          "metadata": {
+            "probability": "0.6"
+          }
+        },
+        {
+          "label": "Tested",
+          "displayOrder": 3,
+          "metadata": {
+            "probability": "0.8"
+          }
+        },
+        {
+          "label": "Promoted",
+          "displayOrder": 4,
+          "metadata": {
+            "probability": "1"
+          }
+        },
+        {
+          "label": "Retest",
+          "displayOrder": 5,
+          "metadata": {
+            "probability": "0"
+          }
+        }
+      ]
+    },
+    {
+      "label": "KORMA · Certifications",
+      "displayOrder": 3,
+      "stages": [
+        {
+          "label": "Application Started",
+          "displayOrder": 0,
+          "metadata": {
+            "probability": "0.1"
+          }
+        },
+        {
+          "label": "Submitted",
+          "displayOrder": 1,
+          "metadata": {
+            "probability": "0.2"
+          }
+        },
+        {
+          "label": "Evidence Review",
+          "displayOrder": 2,
+          "metadata": {
+            "probability": "0.4"
+          }
+        },
+        {
+          "label": "Payment Pending",
+          "displayOrder": 3,
+          "metadata": {
+            "probability": "0.6"
+          }
+        },
+        {
+          "label": "Approved",
+          "displayOrder": 4,
+          "metadata": {
+            "probability": "0.8"
+          }
+        },
+        {
+          "label": "Sent to Federation",
+          "displayOrder": 5,
+          "metadata": {
+            "probability": "0.9"
+          }
+        },
+        {
+          "label": "Certificate Issued",
+          "displayOrder": 6,
+          "metadata": {
+            "probability": "1"
+          }
+        },
+        {
+          "label": "Needs Amendment",
+          "displayOrder": 7,
+          "metadata": {
+            "probability": "0"
+          }
+        },
+        {
+          "label": "Denied",
+          "displayOrder": 8,
+          "metadata": {
+            "probability": "0"
+          }
+        }
+      ]
+    },
+    {
+      "label": "KORMA · School Charters",
+      "displayOrder": 4,
+      "stages": [
+        {
+          "label": "Inquiry",
+          "displayOrder": 0,
+          "metadata": {
+            "probability": "0.1"
+          }
+        },
+        {
+          "label": "Application",
+          "displayOrder": 1,
+          "metadata": {
+            "probability": "0.3"
+          }
+        },
+        {
+          "label": "Review",
+          "displayOrder": 2,
+          "metadata": {
+            "probability": "0.6"
+          }
+        },
+        {
+          "label": "Fee Paid",
+          "displayOrder": 3,
+          "metadata": {
+            "probability": "0.9"
+          }
+        },
+        {
+          "label": "Active",
+          "displayOrder": 4,
+          "metadata": {
+            "probability": "1"
+          }
+        },
+        {
+          "label": "Declined",
+          "displayOrder": 5,
+          "metadata": {
+            "probability": "0"
+          }
+        }
+      ]
+    },
+    {
+      "label": "KORMA · Events & Seminars",
+      "displayOrder": 5,
+      "stages": [
+        {
+          "label": "Inquiry",
+          "displayOrder": 0,
+          "metadata": {
+            "probability": "0.1"
+          }
+        },
+        {
+          "label": "Proposal",
+          "displayOrder": 1,
+          "metadata": {
+            "probability": "0.4"
+          }
+        },
+        {
+          "label": "Booked",
+          "displayOrder": 2,
+          "metadata": {
+            "probability": "0.8"
+          }
+        },
+        {
+          "label": "Delivered",
+          "displayOrder": 3,
+          "metadata": {
+            "probability": "1"
+          }
+        },
+        {
+          "label": "Lost",
+          "displayOrder": 4,
+          "metadata": {
+            "probability": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "rankLadders": {
+    "tkd": [
+      {
+        "label": "10th Gup",
+        "value": "g10",
+        "displayOrder": 0
+      },
+      {
+        "label": "9th Gup",
+        "value": "g9",
+        "displayOrder": 1
+      },
+      {
+        "label": "8th Gup",
+        "value": "g8",
+        "displayOrder": 2
+      },
+      {
+        "label": "7th Gup",
+        "value": "g7",
+        "displayOrder": 3
+      },
+      {
+        "label": "6th Gup",
+        "value": "g6",
+        "displayOrder": 4
+      },
+      {
+        "label": "5th Gup",
+        "value": "g5",
+        "displayOrder": 5
+      },
+      {
+        "label": "4th Gup",
+        "value": "g4",
+        "displayOrder": 6
+      },
+      {
+        "label": "3rd Gup",
+        "value": "g3",
+        "displayOrder": 7
+      },
+      {
+        "label": "2nd Gup",
+        "value": "g2",
+        "displayOrder": 8
+      },
+      {
+        "label": "1st Gup",
+        "value": "g1",
+        "displayOrder": 9
+      },
+      {
+        "label": "1st Poom",
+        "value": "p1",
+        "displayOrder": 10
+      },
+      {
+        "label": "2nd Poom",
+        "value": "p2",
+        "displayOrder": 11
+      },
+      {
+        "label": "3rd Poom",
+        "value": "p3",
+        "displayOrder": 12
+      },
+      {
+        "label": "4th Poom",
+        "value": "p4",
+        "displayOrder": 13
+      },
+      {
+        "label": "1st Dan",
+        "value": "d1",
+        "displayOrder": 14
+      },
+      {
+        "label": "2nd Dan",
+        "value": "d2",
+        "displayOrder": 15
+      },
+      {
+        "label": "3rd Dan",
+        "value": "d3",
+        "displayOrder": 16
+      },
+      {
+        "label": "4th Dan",
+        "value": "d4",
+        "displayOrder": 17
+      },
+      {
+        "label": "5th Dan",
+        "value": "d5",
+        "displayOrder": 18
+      },
+      {
+        "label": "6th Dan",
+        "value": "d6",
+        "displayOrder": 19
+      },
+      {
+        "label": "7th Dan",
+        "value": "d7",
+        "displayOrder": 20
+      },
+      {
+        "label": "8th Dan",
+        "value": "d8",
+        "displayOrder": 21
+      },
+      {
+        "label": "9th Dan",
+        "value": "d9",
+        "displayOrder": 22
+      }
+    ],
+    "hkd": [
+      {
+        "label": "10th Gup",
+        "value": "g10",
+        "displayOrder": 0
+      },
+      {
+        "label": "9th Gup",
+        "value": "g9",
+        "displayOrder": 1
+      },
+      {
+        "label": "8th Gup",
+        "value": "g8",
+        "displayOrder": 2
+      },
+      {
+        "label": "7th Gup",
+        "value": "g7",
+        "displayOrder": 3
+      },
+      {
+        "label": "6th Gup",
+        "value": "g6",
+        "displayOrder": 4
+      },
+      {
+        "label": "5th Gup",
+        "value": "g5",
+        "displayOrder": 5
+      },
+      {
+        "label": "4th Gup",
+        "value": "g4",
+        "displayOrder": 6
+      },
+      {
+        "label": "3rd Gup",
+        "value": "g3",
+        "displayOrder": 7
+      },
+      {
+        "label": "2nd Gup",
+        "value": "g2",
+        "displayOrder": 8
+      },
+      {
+        "label": "1st Gup",
+        "value": "g1",
+        "displayOrder": 9
+      },
+      {
+        "label": "1st Dan",
+        "value": "d1",
+        "displayOrder": 10
+      },
+      {
+        "label": "2nd Dan",
+        "value": "d2",
+        "displayOrder": 11
+      },
+      {
+        "label": "3rd Dan",
+        "value": "d3",
+        "displayOrder": 12
+      },
+      {
+        "label": "4th Dan",
+        "value": "d4",
+        "displayOrder": 13
+      },
+      {
+        "label": "5th Dan",
+        "value": "d5",
+        "displayOrder": 14
+      },
+      {
+        "label": "6th Dan",
+        "value": "d6",
+        "displayOrder": 15
+      },
+      {
+        "label": "7th Dan",
+        "value": "d7",
+        "displayOrder": 16
+      },
+      {
+        "label": "8th Dan",
+        "value": "d8",
+        "displayOrder": 17
+      },
+      {
+        "label": "9th Dan",
+        "value": "d9",
+        "displayOrder": 18
+      }
+    ],
+    "kumdo": [
+      {
+        "label": "9th Gup",
+        "value": "g9",
+        "displayOrder": 0
+      },
+      {
+        "label": "8th Gup",
+        "value": "g8",
+        "displayOrder": 1
+      },
+      {
+        "label": "7th Gup",
+        "value": "g7",
+        "displayOrder": 2
+      },
+      {
+        "label": "6th Gup",
+        "value": "g6",
+        "displayOrder": 3
+      },
+      {
+        "label": "5th Gup",
+        "value": "g5",
+        "displayOrder": 4
+      },
+      {
+        "label": "4th Gup",
+        "value": "g4",
+        "displayOrder": 5
+      },
+      {
+        "label": "3rd Gup",
+        "value": "g3",
+        "displayOrder": 6
+      },
+      {
+        "label": "2nd Gup",
+        "value": "g2",
+        "displayOrder": 7
+      },
+      {
+        "label": "1st Gup",
+        "value": "g1",
+        "displayOrder": 8
+      },
+      {
+        "label": "1st Dan",
+        "value": "d1",
+        "displayOrder": 9
+      },
+      {
+        "label": "2nd Dan",
+        "value": "d2",
+        "displayOrder": 10
+      },
+      {
+        "label": "3rd Dan",
+        "value": "d3",
+        "displayOrder": 11
+      },
+      {
+        "label": "4th Dan",
+        "value": "d4",
+        "displayOrder": 12
+      },
+      {
+        "label": "5th Dan",
+        "value": "d5",
+        "displayOrder": 13
+      },
+      {
+        "label": "6th Dan",
+        "value": "d6",
+        "displayOrder": 14
+      },
+      {
+        "label": "7th Dan",
+        "value": "d7",
+        "displayOrder": 15
+      },
+      {
+        "label": "8th Dan",
+        "value": "d8",
+        "displayOrder": 16
+      }
+    ]
+  },
+  "legacyProperties": [
+    "korma_date_of_birth",
+    "changmookwan_sex",
+    "changmookwan_disciplines",
+    "changmookwan_application_ref",
+    "changmookwan_applied_certs",
+    "changmookwan_applied_dan_rank",
+    "changmookwan_instructor_level",
+    "changmookwan_gym_name",
+    "wkmaf_sex",
+    "wkmaf_disciplines",
+    "wkmaf_application_ref",
+    "wkmaf_applied_certs",
+    "wkmaf_applied_dan_rank",
+    "wkmaf_instructor_level",
+    "wkmaf_gym_name",
+    "whmaf_sex",
+    "whmaf_disciplines",
+    "whmaf_application_ref",
+    "whmaf_applied_certs",
+    "whmaf_applied_dan_rank",
+    "whmaf_instructor_level",
+    "whmaf_gym_name"
+  ]
+}
