@@ -49,8 +49,11 @@ export function client(token, fetchImpl = fetch) {
   };
 }
 
-/** Plans (and with apply=true, performs) every additive change. Returns a report. */
-export async function provision({ token, apply = false, expectPortal = undefined, fetchImpl = fetch, log = console.log }) {
+/**
+ * Plans (and with apply=true, performs) every additive change. Returns a report.
+ * @param {{ token?: string, apply?: boolean, expectPortal?: string, fetchImpl?: typeof fetch, log?: (...args: any[]) => void }} opts
+ */
+export async function provision({ token, apply = false, expectPortal, fetchImpl = fetch, log = console.log }) {
   if (!token) throw new Error("Set HS_TOKEN_KORMA to the KORMA portal's access token.");
   if (apply && !expectPortal) throw new Error("--apply needs --expect-portal <Hub ID> as a safety check.");
   const hs = client(token, fetchImpl);
