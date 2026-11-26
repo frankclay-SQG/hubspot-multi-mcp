@@ -10,6 +10,7 @@ A private MCP server that gives Claude access to several HubSpot portals through
 | `korma` | KORMA-USA |
 | `viola` | Viola Holdings |
 | `clay` | Clay Agency (optional) |
+| `cherish` | Cherish Consulting (Hub ID 247873574) |
 
 Cancer Coach USA is not included (it uses Viotto, not HubSpot). A portal with no token configured shows as "unavailable" and is otherwise ignored.
 
