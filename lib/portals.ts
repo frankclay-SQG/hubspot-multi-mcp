@@ -80,6 +80,16 @@ export const PORTALS: PortalConfig[] = [
     writesAllowed: true,
     blockedDomains: ["hologic.com"],
   },
+  {
+    // Dr. Carol Cherich's practice (cherishconsulting.com). HubSpot names the account "Cherich Consulting".
+    key: "cherish",
+    label: "Cherish Consulting",
+    tokenEnv: "HS_TOKEN_CHERISH",
+    portalIdEnv: "HS_PORTAL_ID_CHERISH",
+    portalId: "247873574",
+    writesAllowed: true,
+    blockedDomains: [],
+  },
 ];
 
 /** Extra blocked domains per portal from env, e.g. BLOCKED_DOMAINS_NEWDAWN="a.com,b.com". */

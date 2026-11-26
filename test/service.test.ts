@@ -111,7 +111,7 @@ describe("domain helpers", () => {
 describe("portal verification", () => {
   it("marks unconfigured portals unavailable without breaking the others", async () => {
     const r = await svc.listPortals();
-    for (const k of ["ndconsulting", "korma", "viola"]) expect(r.find((p) => p.portal === k)!.status).toBe("unavailable");
+    for (const k of ["ndconsulting", "korma", "viola", "cherish"]) expect(r.find((p) => p.portal === k)!.status).toBe("unavailable");
     expect(r.find((p) => p.portal === "sqg")!.status).toBe("ok");
   });
 
@@ -119,7 +119,7 @@ describe("portal verification", () => {
     const r = await svc.listPortals();
     const ok = Object.fromEntries(r.map((p) => [p.portal, p.status]));
     expect(ok).toMatchObject({ newdawn: "ok", clay: "ok", sqg: "ok" });
-    expect(r.map((p) => p.portal)).toEqual(["newdawn", "ndconsulting", "sqg", "korma", "viola", "clay"]);
+    expect(r.map((p) => p.portal)).toEqual(["newdawn", "ndconsulting", "sqg", "korma", "viola", "clay", "cherish"]);
   });
 
   it("disables a portal whose token belongs to a different Hub ID (swapped tokens)", async () => {
