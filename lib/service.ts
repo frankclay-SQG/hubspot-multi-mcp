@@ -35,6 +35,15 @@ const IDENTITY_PROP: Partial<Record<string, string>> = { contacts: "email", comp
 
 const VERIFY_TTL_MS = 10 * 60 * 1000;
 
+export const TASK_STATUSES = ["NOT_STARTED", "IN_PROGRESS", "WAITING", "COMPLETED", "DEFERRED"] as const;
+export type TaskStatus = (typeof TASK_STATUSES)[number];
+
+export interface OptionInput {
+  label: string;
+  value: string;
+  description?: string;
+}
+
 interface VerifyState {
   ok: boolean;
   checkedAt: number;
@@ -327,6 +336,98 @@ export class Service {
         objectType: "tasks",
         recordId: String(task.id),
       };
+    });
+  }
+
+  /**
+   * Adds options to one or more dropdown / checkbox / radio properties.
+   * Append-only: existing options are kept exactly as they are (label, order,
+   * hidden flag). Options whose value is already there are skipped, so a
+   * repeat call changes nothing. Never removes or renames an option.
+   */
+  addPropertyOptions(key: string, confirm: string | undefined, objectType: WriteType, propertyNames: string[], options: OptionInput[], ctx: Ctx = {}) {
+    return this.write(key, confirm, "add_property_options", ctx, async ({ hs }) => {
+      const names = [...new Set(propertyNames.map((n) => n.trim()).filter(Boolean))];
+      if (!names.length) throw new GuardrailError("Name at least one property.");
+      if (!options.length) throw new GuardrailError("Give at least one option to add.");
+      const seen = new Set<string>();
+      for (const o of options) {
+        if (!o.label.trim() || !o.value.trim()) throw new GuardrailError("Every option needs a label and a value.");
+        if (o.value.includes(";")) throw new GuardrailError(`Option value "${o.value}" contains ";", which HubSpot uses to separate multi-select values.`);
+        if (seen.has(o.value)) throw new GuardrailError(`Option value "${o.value}" is listed twice.`);
+        seen.add(o.value);
+      }
+
+      // Check every property first, so nothing is changed if one of them is wrong.
+      const defs = [];
+      for (const name of names) {
+        const def = await hs.getProperty(objectType, name);
+        if (!def) throw new GuardrailError(`No ${objectType} property "${name}" in this portal. Use list_properties to find the internal name.`);
+        if (def.type !== "enumeration" || def.fieldType === "booleancheckbox")
+          throw new GuardrailError(`"${name}" is a ${def.type}/${def.fieldType} property; options can only be added to dropdown, multiple checkbox or radio properties.`);
+        const existing: any[] = def.options ?? [];
+        for (const o of options) {
+          const sameLabel = existing.find((e) => e.label === o.label && e.value !== o.value);
+          if (sameLabel) throw new GuardrailError(`"${name}" already has the label "${o.label}" (value "${sameLabel.value}"). Use a different label.`);
+        }
+        defs.push({ name, existing });
+      }
+
+      const results = [];
+      for (const { name, existing } of defs) {
+        const have = new Set(existing.map((e) => String(e.value)));
+        const toAdd = options.filter((o) => !have.has(o.value));
+        const already = options.filter((o) => have.has(o.value)).map((o) => o.value);
+        if (toAdd.length) {
+          let order = existing.reduce((m, e) => Math.max(m, Number(e.displayOrder ?? -1)), -1);
+          const merged = [
+            ...existing,
+            ...toAdd.map((o) => ({ label: o.label, value: o.value, ...(o.description ? { description: o.description } : {}), displayOrder: ++order, hidden: false })),
+          ];
+          await hs.updateProperty(objectType, name, { options: merged });
+        }
+        results.push({ property: name, added: toAdd.map((o) => o.value), alreadyPresent: already, optionCountBefore: existing.length, optionCountAfter: existing.length + toAdd.length });
+      }
+      return { results, objectType: "properties", recordId: undefined };
+    });
+  }
+
+  /**
+   * Changes a task's subject, notes, due date, status or priority. Only the
+   * fields given change. Refused when the task is linked to a blocked contact
+   * or company, like the other writes.
+   */
+  updateTask(
+    key: string,
+    confirm: string | undefined,
+    id: string,
+    t: { subject?: string; body?: string; dueDate?: string; status?: TaskStatus; priority?: "LOW" | "MEDIUM" | "HIGH" },
+    ctx: Ctx = {},
+  ) {
+    return this.write(key, confirm, "update_task", ctx, async ({ p, hs }) => {
+      const props: Record<string, string> = {};
+      if (t.subject !== undefined) {
+        if (!t.subject.trim()) throw new GuardrailError("Subject can't be empty.");
+        props.hs_task_subject = t.subject;
+      }
+      if (t.body !== undefined) props.hs_task_body = t.body;
+      if (t.dueDate !== undefined) {
+        const due = new Date(t.dueDate);
+        if (Number.isNaN(due.getTime())) throw new GuardrailError(`"${t.dueDate}" is not a valid date. Use YYYY-MM-DD or an ISO timestamp.`);
+        props.hs_timestamp = due.toISOString();
+      }
+      if (t.status !== undefined) props.hs_task_status = t.status;
+      if (t.priority !== undefined) props.hs_task_priority = t.priority;
+      if (!Object.keys(props).length) throw new GuardrailError("Nothing to change: give subject, body, dueDate, status or priority.");
+
+      const before = await this.requireRecord(hs, p, "tasks", id, Object.keys(props));
+      for (const type of ["contacts", "companies"] as const) {
+        const linked = await hs.listAssociations("tasks", id, type);
+        for (const l of linked.results) await this.assertRecordNotBlocked(hs, p, type, String(l.toObjectId));
+      }
+      const after = await hs.update("tasks", id, props);
+      const changes = Object.keys(props).map((k) => ({ property: k, before: before.properties?.[k] ?? null, after: after.properties?.[k] ?? props[k] }));
+      return { updated: true, taskId: id, changes, objectType: "tasks", recordId: id };
     });
   }
 

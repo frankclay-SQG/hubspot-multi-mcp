@@ -128,6 +128,21 @@ export class HubSpotClient {
     return this.request<{ results: any[] }>("GET", `/crm/v3/properties/${objectType}`);
   }
 
+  /** One property definition; null on 404. */
+  async getProperty(objectType: string, name: string) {
+    try {
+      return await this.request<any>("GET", `/crm/v3/properties/${objectType}/${encodeURIComponent(name)}`);
+    } catch (e) {
+      if (e instanceof HubSpotError && e.status === 404) return null;
+      throw e;
+    }
+  }
+
+  /** Needs the crm.schemas.<object>.write scope on the portal's app. */
+  updateProperty(objectType: string, name: string, body: Record<string, unknown>) {
+    return this.request<any>("PATCH", `/crm/v3/properties/${objectType}/${encodeURIComponent(name)}`, body);
+  }
+
   pipelines(objectType: "deals" | "tickets") {
     return this.request<{ results: any[] }>("GET", `/crm/v3/pipelines/${objectType}`);
   }
