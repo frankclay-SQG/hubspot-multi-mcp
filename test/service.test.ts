@@ -14,6 +14,13 @@ function fakeHubSpot(portals: Record<string, string>) {
   const assoc: { hub: string; from: string; fromId: string; to: string; toId: string }[] = [];
   let next = 1000;
   const calls: { method: string; path: string }[] = [];
+  const propStores = new Map<string, Map<string, any>>(); // `${hub}:${type}` -> name -> definition
+  const props = (hub: string, type: string) => {
+    const k = `${hub}:${type}`;
+    if (!propStores.has(k)) propStores.set(k, new Map());
+    return propStores.get(k)!;
+  };
+  const scopeless = new Set<string>(); // hubs whose app lacks the schema write scope
   const store = (hub: string, type: string) => {
     if (!stores.has(hub)) stores.set(hub, new Map());
     const s = stores.get(hub)!;
@@ -33,6 +40,17 @@ function fakeHubSpot(portals: Record<string, string>) {
     const parts = u.pathname.split("/").filter(Boolean);
 
     if (u.pathname === "/account-info/v3/details") return json(200, { portalId: Number(hub), accountType: "STANDARD", uiDomain: "app.hubspot.com" });
+
+    // /crm/v3/properties/{type}/{name}
+    if (parts[0] === "crm" && parts[1] === "v3" && parts[2] === "properties" && parts[4]) {
+      const def = props(hub, parts[3]).get(decodeURIComponent(parts[4]));
+      if (!def) return json(404, { message: "Property not found" });
+      if (method === "PATCH") {
+        if (scopeless.has(hub)) return json(403, { message: "This app hasn't been granted all required scopes." });
+        Object.assign(def, body);
+      }
+      return json(200, def);
+    }
 
     // /crm/v3/objects/{type}/search
     if (parts[0] === "crm" && parts[1] === "v3" && parts[2] === "objects") {
@@ -71,7 +89,7 @@ function fakeHubSpot(portals: Record<string, string>) {
     }
     return json(404, { message: `unhandled ${method} ${u.pathname}` });
   };
-  return { fetchImpl: fetchImpl as typeof fetch, store, calls, assoc };
+  return { fetchImpl: fetchImpl as typeof fetch, store, calls, assoc, props, scopeless };
 }
 
 const ENV = {
@@ -244,5 +262,99 @@ describe("rate limiting", () => {
     const r = await s2.search("sqg", "contacts", {});
     expect(r.total).toBe(0);
     expect(n).toBe(3); // verify + 429 + retry
+  });
+});
+
+describe("add_property_options", () => {
+  const RES = ["sqg_resources_downloaded", "sqg_first_resource", "sqg_last_resource"];
+  const seed = () => {
+    for (const name of RES)
+      hs.props("222", "contacts").set(name, {
+        name,
+        type: "enumeration",
+        fieldType: name === "sqg_resources_downloaded" ? "checkbox" : "select",
+        options: [
+          { label: "SOUP Evaluation Template", value: "soup", displayOrder: 0, hidden: false },
+          { label: "Old thing", value: "old", displayOrder: 1, hidden: true },
+        ],
+      });
+  };
+
+  it("appends an option to every named property and keeps existing ones untouched", async () => {
+    seed();
+    const r = await svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "SOUP risk triage scorer (tool)", value: "tool_soup" }]);
+    expect(r.tag).toBe("[portal: sqg — Software Quality Guru]");
+    expect(r.results.map((x) => [x.property, x.added, x.optionCountAfter])).toEqual(RES.map((n) => [n, ["tool_soup"], 3]));
+    for (const name of RES) {
+      const opts = hs.props("222", "contacts").get(name).options;
+      expect(opts.map((o: any) => o.value)).toEqual(["soup", "old", "tool_soup"]);
+      expect(opts[1]).toEqual({ label: "Old thing", value: "old", displayOrder: 1, hidden: true });
+      expect(opts[2]).toMatchObject({ displayOrder: 2, hidden: false });
+    }
+  });
+
+  it("is idempotent: a repeat call adds nothing and sends no update", async () => {
+    seed();
+    await svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "SOUP risk triage scorer (tool)", value: "tool_soup" }]);
+    const patches = () => hs.calls.filter((c) => c.method === "PATCH" && c.path.startsWith("/crm/v3/properties")).length;
+    const before = patches();
+    const r = await svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "SOUP risk triage scorer (tool)", value: "tool_soup" }]);
+    expect(r.results.every((x) => x.added.length === 0 && x.alreadyPresent[0] === "tool_soup")).toBe(true);
+    expect(patches()).toBe(before);
+  });
+
+  it("changes nothing when any named property is missing or not a dropdown", async () => {
+    seed();
+    hs.props("222", "contacts").set("notes_text", { name: "notes_text", type: "string", fieldType: "text" });
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", ["sqg_first_resource", "nope"], [{ label: "X", value: "x" }])).rejects.toThrow(/No contacts property "nope"/);
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", ["sqg_first_resource", "notes_text"], [{ label: "X", value: "x" }])).rejects.toThrow(/dropdown/);
+    expect(hs.calls.filter((c) => c.method === "PATCH")).toHaveLength(0);
+  });
+
+  it("refuses bad option input and a label already used by another value", async () => {
+    seed();
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "A", value: "a;b" }])).rejects.toThrow(/";"/);
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "A", value: "a" }, { label: "B", value: "a" }])).rejects.toThrow(/twice/);
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", RES, [{ label: "SOUP Evaluation Template", value: "soup2" }])).rejects.toThrow(/already has the label/);
+  });
+
+  it("needs confirm_portal, and reports a missing schema scope plainly", async () => {
+    seed();
+    await expect(svc.addPropertyOptions("sqg", "newdawn", "contacts", RES, [{ label: "X", value: "x" }])).rejects.toThrow(/confirm_portal/);
+    hs.scopeless.add("222");
+    await expect(svc.addPropertyOptions("sqg", "sqg", "contacts", ["sqg_first_resource"], [{ label: "X", value: "x" }])).rejects.toThrow(/scopes.*HTTP 403/);
+  });
+
+  it("can't reach another portal's property", async () => {
+    seed(); // seeded in sqg only
+    await expect(svc.addPropertyOptions("newdawn", "newdawn", "contacts", ["sqg_first_resource"], [{ label: "X", value: "x" }])).rejects.toThrow(/No contacts property/);
+  });
+});
+
+describe("update_task", () => {
+  it("moves a due date and marks a task done, returning before/after", async () => {
+    const c = await svc.createRecord("sqg", "sqg", "contacts", { email: "p@acme.com" });
+    const t = await svc.createTask("sqg", "sqg", { subject: "Follow-up 2", dueDate: "2026-11-30", relatedType: "contacts", relatedId: c.record.id });
+    const u = await svc.updateTask("sqg", "sqg", t.taskId, { dueDate: "2026-12-07T14:00:00Z" });
+    expect(u.changes).toEqual([{ property: "hs_timestamp", before: "2026-11-30T00:00:00.000Z", after: "2026-12-07T14:00:00.000Z" }]);
+    const d = await svc.updateTask("sqg", "sqg", t.taskId, { status: "COMPLETED" });
+    expect(d.changes).toEqual([{ property: "hs_task_status", before: "NOT_STARTED", after: "COMPLETED" }]);
+    expect(hs.store("222", "tasks").get(t.taskId)!.properties.hs_task_subject).toBe("Follow-up 2");
+  });
+
+  it("refuses an empty change, a bad date and a task from another portal", async () => {
+    const t = await svc.createTask("sqg", "sqg", { subject: "x", dueDate: "2026-11-30" });
+    await expect(svc.updateTask("sqg", "sqg", t.taskId, {})).rejects.toThrow(/Nothing to change/);
+    await expect(svc.updateTask("sqg", "sqg", t.taskId, { dueDate: "someday" })).rejects.toThrow(/valid date/);
+    await expect(svc.updateTask("sqg", "sqg", t.taskId, { subject: " " })).rejects.toThrow(/empty/);
+    await expect(svc.updateTask("newdawn", "newdawn", t.taskId, { status: "COMPLETED" })).rejects.toThrow(/different portal/);
+  });
+
+  it("refuses a task linked to a blocked-domain contact", async () => {
+    hs.store("246454273", "contacts").set("55", { id: "55", properties: { email: "old@hologic.com" } });
+    hs.store("246454273", "tasks").set("77", { id: "77", properties: { hs_task_subject: "x", hs_task_status: "NOT_STARTED" } });
+    hs.assoc.push({ hub: "246454273", from: "tasks", fromId: "77", to: "contacts", toId: "55" });
+    await expect(svc.updateTask("newdawn", "newdawn", "77", { status: "COMPLETED" })).rejects.toThrow(/blocked/);
+    expect(hs.store("246454273", "tasks").get("77")!.properties.hs_task_status).toBe("NOT_STARTED");
   });
 });

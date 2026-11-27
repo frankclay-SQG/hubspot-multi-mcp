@@ -19,7 +19,7 @@ Add or change portals in `lib/portals.ts`.
 
 **Read (no confirmation):** `list_portals`, `search_records`, `get_record`, `list_properties`, `list_pipelines`, `get_notes`, `find_across_portals`.
 
-**Write (Claude asks first):** `create_record` (find-or-create; never overwrites), `update_record` (returns before/after), `create_note`, `create_task`, `associate`.
+**Write (Claude asks first):** `create_record` (find-or-create; never overwrites), `update_record` (returns before/after), `create_note`, `create_task`, `update_task` (subject, notes, due date, status, priority; returns before/after), `add_property_options` (append-only dropdown options; never removes, renames or reorders), `associate`.
 
 **Not included:** delete, merge, bulk import, and cross-portal copy. Do those in HubSpot itself.
 
@@ -30,6 +30,7 @@ Add or change portals in `lib/portals.ts`.
 3. Writes need `confirm_portal` equal to `portal`.
 4. Per-portal blocked domains: `hologic.com` is blocked in `newdawn` and `clay`. This covers new records, emails changed to a blocked domain, and notes, tasks or associations on existing blocked records.
 5. Record IDs are checked in the target portal before any write. An ID from another portal is refused.
+   `update_task` also refuses a task linked to a contact or company on the portal's blocked list. `add_property_options` checks every named property before changing any, and skips values already present.
 6. HTTP 429 and 5xx responses are retried with backoff.
 7. Every write emits a JSON `audit` line to the Vercel logs, with IDs only and no personal data.
 
@@ -41,6 +42,7 @@ Add or change portals in `lib/portals.ts`.
    - `crm.objects.deals.read/write`
    - `tickets` (optional)
    - `crm.schemas.contacts.read`, `crm.schemas.companies.read`, `crm.schemas.deals.read`
+   - `crm.schemas.contacts.write` (and `.companies.write` / `.deals.write` if you want options on those objects) — needed only for `add_property_options`; without it that tool returns HubSpot's 403 and nothing else changes
    - `crm.objects.owners.read`
 2. **Vercel env vars:** see `.env.example`.
 3. **OAuth provider** (WorkOS AuthKit or Clerk):

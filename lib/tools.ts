@@ -2,7 +2,7 @@ import type { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { HubSpotError } from "./hubspot";
 import { GuardrailError, PORTAL_KEYS, PORTALS } from "./portals";
-import { ASSOC_TYPES, READ_TYPES, Service, WRITE_TYPES } from "./service";
+import { ASSOC_TYPES, READ_TYPES, Service, TASK_STATUSES, WRITE_TYPES } from "./service";
 
 const portalList = PORTALS.map((p) => `"${p.key}" = ${p.label}`).join("; ");
 
@@ -199,6 +199,48 @@ export function registerTools(server: McpServer, svc: Service) {
       annotations: WRITE,
     },
     async (a, ctx) => run(() => svc.createTask(a.portal, a.confirm_portal, a, userOf(ctx))),
+  );
+
+  server.registerTool(
+    "update_task",
+    {
+      title: "Update task",
+      description:
+        "Change a task's subject, notes, due date, status (e.g. COMPLETED) or priority in ONE portal. Only the fields given change; returns before/after values. Requires confirm_portal.",
+      inputSchema: z.object({
+        portal,
+        confirm_portal: confirmPortal,
+        id: recordId.describe("Task ID (from search_records with objectType tasks)."),
+        subject: z.string().max(500).optional(),
+        body: z.string().max(60000).optional(),
+        dueDate: z.string().optional().describe("YYYY-MM-DD or ISO timestamp."),
+        status: z.enum(TASK_STATUSES).optional(),
+        priority: z.enum(["LOW", "MEDIUM", "HIGH"]).optional(),
+      }),
+      annotations: WRITE,
+    },
+    async (a, ctx) => run(() => svc.updateTask(a.portal, a.confirm_portal, a.id, a, userOf(ctx))),
+  );
+
+  server.registerTool(
+    "add_property_options",
+    {
+      title: "Add dropdown options to properties",
+      description:
+        "Add options to one or more dropdown, multiple checkbox or radio properties in ONE portal. Append-only: never removes, renames or reorders existing options, and skips values that are already there. All properties are checked before any is changed. Needs the crm.schemas.<object>.write scope on that portal's app. Requires confirm_portal.",
+      inputSchema: z.object({
+        portal,
+        confirm_portal: confirmPortal,
+        objectType: z.enum(WRITE_TYPES),
+        properties: z.array(z.string().min(1)).min(1).max(10).describe("Internal property names, e.g. [\"sqg_first_resource\"]."),
+        options: z
+          .array(z.object({ label: z.string().min(1).max(200), value: z.string().min(1).max(100), description: z.string().max(500).optional() }))
+          .min(1)
+          .max(25),
+      }),
+      annotations: WRITE,
+    },
+    async (a, ctx) => run(() => svc.addPropertyOptions(a.portal, a.confirm_portal, a.objectType, a.properties, a.options, userOf(ctx))),
   );
 
   server.registerTool(
